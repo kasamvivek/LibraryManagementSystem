@@ -2,23 +2,15 @@
 polity
 laxmikanth
 5
-2
-economy
-ramesh singh
-6
-1
-polity
-laxmikanth
-5
-2
-economy
-ramesh singh
-10
 3
-geography
-gc leong
-6
-4
 antropology
 ember and ember
-7
+10
+4
+economy
+ramesh singh
+3
+5
+art and culture
+nithin singania
+9

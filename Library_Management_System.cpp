@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 class Book
@@ -22,12 +23,6 @@ private:
     {
         ofstream file("library.txt");
 
-        if(!file)
-        {
-            cout << "Error opening file!" << endl;
-            return;
-        }
-
         for(int i = 0; i < count; i++)
         {
             file << library[i].bookID << endl;
@@ -42,9 +37,7 @@ private:
     void loadFromFile()
     {
         ifstream file("library.txt");
-
-        if(!file)
-            return;
+        if(!file) return;
 
         count = 0;
 
@@ -73,7 +66,7 @@ public:
     {
         if(count >= 100)
         {
-            cout << "Library is full!" << endl;
+            cout << "Library is full!\n";
             return;
         }
 
@@ -93,29 +86,28 @@ public:
         count++;
         saveToFile();
 
-        cout << "Book added successfully!" << endl;
+        cout << "Book added successfully!\n";
     }
 
     void displayBooks()
+{
+    if(count == 0)
     {
-        if(count == 0)
-        {
-            cout << "No books available" << endl;
-            return;
-        }
-
-        cout << "\n--- Book List ---\n";
-
-        for(int i = 0; i < count; i++)
-        {
-            cout << "------------------" << endl;
-            cout << "ID: " << library[i].bookID << endl;
-            cout << "Title: " << library[i].title << endl;
-            cout << "Author: " << library[i].author << endl;
-            cout << "Quantity: " << library[i].quantity << endl;
-        }
+        cout << "No books available\n";
+        return;
     }
 
+    cout << "\n========= Library Records =========\n";
+
+    for(int i = 0; i < count; i++)
+    {
+        cout << "\nBook ID   : " << library[i].bookID << endl;
+        cout << "Title     : " << library[i].title << endl;
+        cout << "Author    : " << library[i].author << endl;
+        cout << "Quantity  : " << library[i].quantity << endl;
+        cout << "\n----------------------------------\n";
+    }
+}
     void searchBook()
     {
         int id;
@@ -126,15 +118,16 @@ public:
         {
             if(library[i].bookID == id)
             {
-                cout << "\nBook Found!" << endl;
-                cout << "Title: " << library[i].title << endl;
-                cout << "Author: " << library[i].author << endl;
-                cout << "Quantity: " << library[i].quantity << endl;
+                cout << "\nBook Found:\n";
+                cout << "ID       : " << library[i].bookID << endl;
+                cout << "Title    : " << library[i].title << endl;
+                cout << "Author   : " << library[i].author << endl;
+                cout << "Quantity : " << library[i].quantity << endl;
                 return;
             }
         }
 
-        cout << "Book not found!" << endl;
+        cout << "Book not found!\n";
     }
 
     void updateBook()
@@ -158,12 +151,12 @@ public:
                 cin >> library[i].quantity;
 
                 saveToFile();
-                cout << "Book updated successfully!" << endl;
+                cout << "Book updated successfully!\n";
                 return;
             }
         }
 
-        cout << "Book not found!" << endl;
+        cout << "Book not found!\n";
     }
 
     void deleteBook()
@@ -183,12 +176,12 @@ public:
 
                 count--;
                 saveToFile();
-                cout << "Book deleted successfully!" << endl;
+                cout << "Book deleted successfully!\n";
                 return;
             }
         }
 
-        cout << "Book not found!" << endl;
+        cout << "Book not found!\n";
     }
 };
 
@@ -216,8 +209,8 @@ int main()
             case 3: lib.searchBook(); break;
             case 4: lib.updateBook(); break;
             case 5: lib.deleteBook(); break;
-            case 6: cout << "Exiting program..." << endl; break;
-            default: cout << "Invalid choice! Try again." << endl;
+            case 6: cout << "Exiting program...\n"; break;
+            default: cout << "Invalid choice!\n";
         }
 
     } while(choice != 6);
